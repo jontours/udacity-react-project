@@ -4,17 +4,16 @@ import './App.css'
 class Book extends React.Component{
 
 	render() {
-    const {book_data} = this.props
+    const {book_data, onChangeShelf} = this.props
     
     let book_url = book_data.imageLinks ? book_data.imageLinks.thumbnail : 'https://books.google.com/googlebooks/images/no_cover_thumb.gif'
     
 		return(
-			<div className="book">
-                          
+			<div className="book">                          
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + book_url +')' }}></div>
             <div className="book-shelf-changer">
-              <select>
+              <select value={book_data.shelf} onChange={(event) => onChangeShelf(event.target.value,book_data)}>
                 <option value="none" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
